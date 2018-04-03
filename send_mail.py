@@ -17,7 +17,7 @@ receiver = "XXXX@qq.com"
 subject ="python send mail test"
 
 #发送附件
-sendfile= open("D:/project/pytest/2018-04-03 12-42-38report.html", 'rb').read()
+sendfile= open("D:/project/pytestfile/2018-04-03 12-42-38report.html", 'rb').read()
 att = MIMEText(sendfile, 'base64', 'utf-8')
 att["Content-Type"]="application/octet-stream"
 att["Content-Disposition"]='acctachment;filename="2018-04-03 12-42-38report.html"'
