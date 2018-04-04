@@ -1,0 +1,246 @@
+一、元素定位
+
+1.id
+find_element_by_id()
+find_element(By.ID,””)
+
+2.name
+find_element_by_name()
+find_element(By.NAME,””)
+
+3.xpath
+ find_element_by_xpath(“//标签[@元素=‘’]”)
+find_element(By.XPATH,’’)
+
+4.class
+ find_element_class_name()
+find_element(By.CLASS_NAME,’’)
+
+5.link_text
+ find_element_by_link_text()
+ find_element(By.LINK_TEXT,’’)
+
+6.css_selecter
+ find_element_by_css_selecter(“标签 ./#”)
+ find_element(By.CSS_SELECTER,””)
+
+7.tag_name
+  find_element_by_tag_name(“标签”)
+  find_element(By.TAG_NAME,”标签”)
+
+8.partial_link_text
+  find_element_by_partial_link_text(“关键字”)
+  find_element(By.PARTIAL_LINK_TEXT,’关键字’)
+
+一-1、一组元素定位
+find_elements_by_id()
+find_elements_by_name()
+find_elements_by_class_name()
+find_elements_by_tag_name()
+find_elements_by_link_text()
+find_elements_by_partial_link_text()
+find_elements_by_xpath()
+find_elements_by_css_selector()
+
+# 选择页面上所有的tag name 为input 的元素
+inputs = driver.find_elements_by_tag_name('input')
+#然后从中过滤出tpye 为checkbox 的元素，单击勾选
+for i in inputs:
+if i.get_attribute('type') == 'checkbox':
+i.click()
+pop() 函数用于获取列表中的一个元素（默认为最后一个元素），并且返回该元素
+的值 pop(0)获取第一个
+二、操作浏览器界面
+
+1、控制浏览器大小
+  set_window_size(width,height)
+2.全屏模式
+  maxmime_window()
+3.前进一页
+forward()
+4.后退一页
+  back()
+5.页面主题
+title
+
+6.当前页
+current_url
+三.webelment常用接口方法
+1.send_keys()  input
+2.submit()  提交表单
+3.size 返回元素的尺寸。
+4.text 获取元素的文本。
+5.get_attribute(name) 获得属性值。
+5.is_displayed() 设置该元素是否用户可见
+
+四、鼠标事件
+   element = driver.find_element_by_name("xxx")
+1. ActionChains执行所有ActionChains 中存储的行为
+2. ActionChains(driver).context_click(element).perform() 右击
+3. ActionChains(driver).double_click(element).perform() 双击
+4.
+#定位元素的源位置
+element = driver.find_element_by_name("xxx")
+#定位元素要移动到的目标位置
+target = driver.find_element_by_name("xxx")
+#执行元素的拖放操作
+ActionChains(driver).drag_and_drop(element,target).perform()拖动
+5. ActionChains(driver).move_to_element(element).perform() 鼠标悬停
+
+五、键盘事件
+1.send_keys(Keys.BACK_SPACE) 删除键（BackSpace）
+2.send_keys(Keys.SPACE) 空格键(Space)
+3.send_keys(Keys.TAB) 制表键(Tab)
+4.send_keys(Keys.ESCAPE) 回退键（Esc）
+5.send_keys(Keys.ENTER) 回车键（Enter）
+6.send_keys(Keys.CONTROL,'a') 全选（Ctrl+A）
+7.send_keys(Keys.CONTROL,'c') 复制（Ctrl+C）
+8.send_keys(Keys.CONTROL,'x') 剪切（Ctrl+X）
+9.send_keys(Keys.CONTROL,'v') 粘贴（Ctrl+V）
+10.send_keys(Keys.F1) 键盘F1
+……
+21.send_keys(Keys.F12) 键盘F12
+
+
+六、等待事件
+1.显式等待
+element = WebDriverWait(driver,5,0.5).until(
+EC.presence_of_element_located((By.ID,"kw")))
+element.send_keys('selenium')
+
+
+EC.title_is 用于判断标题是否xx。
+EC.title_contains 用于判断标题是否包含xx 信息。
+EC.presence_of_element_located 元素是否存在。
+EC.visibility_of_element_located 元素是否可见。
+EC.visibility_of 是否可见
+EC.presence_of_all_elements_located 判断一组元素的是否存在
+EC.text_to_be_present_in_element 判断元素是否有xx 文本信息
+EC.text_to_be_present_in_element_value 判断元素值是否有xx 文本信息
+EC.frame_to_be_available_and_switch_to_it 表单是否可用，并切换到该表单。
+EC.invisibility_of_element_located 判断元素是否隐藏
+EC.element_to_be_clickable 判断元素是否点击，它处于可见和启动状态
+EC.staleness_of 等到一个元素不再是依附于DOM。
+EC.element_to_be_selected 被选中的元素。
+EC.element_located_to_be_selected 一个期望的元素位于被选中。
+EC.element_selection_state_to_be 一个期望检查如果给定的元素被选中。
+EC.element_located_selection_state_to_be 期望找到一个元素并检查是否选择状态
+EC.alert_is_present 预期一个警告信息
+
+2.隐式等待
+implicitly_wait(10)
+
+3.sleep
+sleep()
+
+7.多表单切换
+1.切换表单
+element=find_element_by_xx(“”)
+switch_to.frame(“element”)
+2.返回上一个表单
+switch_to.deault_content()
+8、多窗口切换
+获得原始页面的句柄
+sreach_windows= driver.current_window_handle
+多窗口之后
+#获得当前所有打开的窗口的句柄
+all_handles = driver.window_handles
+#进入注册窗口
+for handle in all_handles:
+if handle != sreach_windows:
+driver.switch_to_window(handle)
+print 'now register window!'
+driver.find_element_by_name("account").send_keys('username')
+driver.find_element_by_name('password').send_keys('password')
+#……
+#进入搜索窗口
+for handle in all_handles:
+if handle == sreach_windows:
+driver.switch_to_window(handle)
+print 'now sreach window!'
+driver.find_element_by_id('TANGRAM__PSP_2__closeBtn').click()
+driver.find_element_by_id("kw").send_keys("selenium")
+driver.find_element_by_id("su").click()
+time.sleep(5)
+
+9.弹框处理
+#接收弹窗
+switch_to.alert().accept()
+.text 返回alert/confirm/prompt 中的文字信息。
+               .accept 点击确认按钮。
+               .dismiss 点击取消按钮，如果有的话。
+               .send_keys 输入值，这个alert\confirm 没有对话框就不能用了，不然会报错。
+
+10.文件上传
+1.send_keys(“本地路径”)
+2. AutoIt 实现上传    windows系统
+
+11.下载文件
+
+
+12.操作Cookie
+webdriver 操作cookie 的方法有：
+ get_cookies() 获得所有cookie 信息
+ get_cookie(name) 返回有特定name 值有cookie 信息
+ add_cookie(cookie_dict) 添加cookie，必须有name 和value 值
+ delete_cookie(name) 删除特定(部分)的cookie 信息
+ delete_all_cookies() 删除所有cookie 信息
+
+13.调用js
+js = “windows.scrollTo(400,400)”
+driver.execute_script(js)
+
+13.窗口截图
+get_screenshot_as_file()
+try:
+driver.find_element_by_id('kw_error').send_key('selenium')
+driver.find_element_by_id('su').click()
+except :
+driver.get_screenshot_as_file("D:\\baidu_error.jpg")//截图保存地址
+
+14.验证码处理
+#将用户名密码写入浏览器cookie
+driver.add_cookie({'name':'Login_UserNumber', 'value':'username'})
+driver.add_cookie({'name':'Login_Passwd', 'value':'password'})
+#再次访问xx 网站，将会自动登录
+driver.get("http://www.xx.cn/")
+
+或者设置一个万能验证码
+
+
+unittest
+#必须要继承TestCase类
+class CountTest(unittest.TestCase):
+if __name__ == '__main__':
+    #unittest.main()
+    #执行顺序 a-z,A-Z，0-9
+
+#测试套件 ----》运行测试的集合
+    suit = unittest.TestSuite()
+    suit.addTest(CountTest("test_add2"))
+   # suit.addTest(CountTest("test_add2"))
+    runner = unittest.TextTestRunner()
+    runner.run(suit)
+
+unittest.TestCase
+一个TestCase 的实例就是一个测试用例。什么是测试用例呢？就是一个完整的测试流程，包括测试
+前准备环境的搭建(setUp)，实现测试过程的代码(run)，以及测试后环境的还原(tearDown)。元测试(unit
+test)的本质也就在这里，一个测试用例是一个完整的测试单元，通过运行这个测试单元，可以对某一个
+功能进行验证。
+
+unittest.TestSuite
+对一个功能的验证往往是需要多测试用例的，可以把多的测试用例集合在一起执行，这就产生了测试
+套件TestSuite 的概念，它用来组装单个测试用例，而且TestSuite 也可以嵌套TestSuite。
+可以通过addTest 加载TestCase 到TestSuite 中，再返回一个TestSuite 实例。
+
+
+
+test runner
+unittest.TextTestRunner 是来执行测试用例的，其中的run(test)用来执行TestSuite/TestCase。测试的结果
+会保存到TextTestResult 实例中，包括运行了多少测试用例，成功了多少，失败了多少等信息。
+
+test fixture
+对一个测试用例环境的搭建和销毁，是一个fixture，通过覆盖TestCase 的setUp()和tearDown()
+方法来实现。这个有什么用呢？比如说在这个测试用例中需要访问数据库，那么可以在setUp()中建立数据库连接以及进行一些初始化，在tearDown()中清除在数据库中产生的数据，然后关闭连接。注意tearDown
+的过程很重要，要为以后的TestCase 留下一个干净的环境。
+

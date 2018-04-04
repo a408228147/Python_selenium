@@ -26,6 +26,7 @@ class CountTest(unittest.TestCase):
         c = Count(3, 5)
         result = c.sub()
         self.assertEqual(result, -2)
+        '''
 class AssertTestDemo(unittest.TestCase):
 
     def test_ae(self):
@@ -38,14 +39,14 @@ class AssertTestDemo(unittest.TestCase):
     def test_in(self):
         a = "dasdas"
         self.assertIn("da",a)
-
+'''
 if __name__ == '__main__':
     #unittest.main()
     #执行顺序 a-z,A-Z，0-9
 
 #测试套件 ----》运行测试的集合
     suit = unittest.TestSuite()
-    suit.addTest(AssertTestDemo("test_ae"))
+    suit.addTest(CountTest("test_add2"))
    # suit.addTest(CountTest("test_add2"))
     runner = unittest.TextTestRunner()
     runner.run(suit)

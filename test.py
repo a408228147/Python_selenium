@@ -53,6 +53,7 @@ finally:
 
 driver.find_element_by_id("kw").send_keys("郑浩强")#输入
 driver.find_element(By.ID,"kw").send_keys()
+driver.find_element(By.CLASS_NAME)
 driver.find_element_by_id("kw").send_keys(Keys.BACK_SPACE)#删除
 driver.find_element_by_id("kw").send_keys(Keys.SPACE)#空格
 driver.find_element_by_id("kw").send_keys(Keys.CONTROL,'a')#全选 x 剪切 c v
@@ -62,6 +63,7 @@ driver.find_element_by_id("kw").text#断言常用方法
 driver.find_element_by_id("kw").get_attribute("maxlength")#获取属性
 driver.find_element_by_id("kw").is_displayed()#是否可见 返回true false
 driver.find_element_by_css_selector("span.bg.s_btn_wr input#su").click()
+driver.find_element(By.CSS_SELECTOR)
 for i in range(1,11):
     if "_百度搜索" in driver.title:#页面标题
        break

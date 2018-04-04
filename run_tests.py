@@ -23,10 +23,10 @@ if __name__ =='__main__':
     suit = unittest.defaultTestLoader.discover("./unittestfile", "test_*.py", )
     nowtime = time.strftime("%Y-%m-%d %H-%M-%S")
     test_report =nowtime+"report.html"
-    with open(test_report, 'rb') as f:
+    with open(test_report, 'wb') as f:
         runner = HTMLTestRunner.HTMLTestRunner(f)
         runner.run(suit)
-    send_mail("2018-04-03 12-42-38report.html")
+    #send_mail("2018-04-03 12-42-38report.html")
 #执行顺序 还是a-z,A-Z，0-9
 '''
 runner = unittest.TextTestRunner()
